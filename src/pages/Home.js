@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { query } from '../utils/api';
+import '../css/home.css';
 
 class Home extends Component {
   constructor(props) {
@@ -17,8 +18,7 @@ class Home extends Component {
 
   render () {
     return (
-      <div>
-        <h3>Dernières images</h3>
+      <div className="home pure-g">
         {this.state.images.map((image, idx) => {
           return <img src={image.thumb_url} alt={image.title} key={idx} />
         })}
