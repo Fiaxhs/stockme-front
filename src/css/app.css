@@ -19,22 +19,21 @@ body {
   align-items: center;
 }
 
+.upload {
+  margin-left: auto;
+}
 
-  .header-uploader {
-    margin-left: auto;
-  }
-
-  .header-uploaderButton {
+  .upload-button {
     display: inline-block;
     padding: 10px 20px;
     cursor: pointer;
   }
-    .header-uploaderButton:hover {
+    .upload-button:hover {
       background-color: #658802;
       color: white;
     }
 
-  .header-modalBackground {
+  .upload-background {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -45,18 +44,25 @@ body {
     justify-content: center;
     background-color:hsla(0, 0%, 38%, 0.4);
   }
-  .header-modalUpload {
+  .upload-modal {
     height: 50%;
     width: 50%;
     background-color: #222;
     padding: 3rem;
   }
 
-  .header-modalDropzone {
+  .upload-dropzone {
     height: 50%;
     margin-top: 25%;
     margin: auto;
     border: 4px dashed #658802;
+  }
+
+  .upload-imageContainer {
+    height: 140px;
+  }
+  .upload-imagePreview {
+    max-height: 140px;
   }
 
 @media screen and (max-width: 1000px) {
@@ -66,11 +72,11 @@ body {
     .header h1 {
       margin-left: 10px;
     }
-    .header-uploaderButton {
+    .upload-button {
       margin-right: 10px;
     }
 
-    .header-modalUpload {
+    .upload-modal {
       top: 1rem;
       width: 90%;
       left: 5%;

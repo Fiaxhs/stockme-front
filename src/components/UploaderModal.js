@@ -14,12 +14,12 @@ class UploaderModal extends Component {
     });
 
     return (
-      <div className="header-modalBackground" onClick={this.handleBackgroundClick}>
-        <div className="header-modalUpload">
+      <div className="upload-background" onClick={this.handleBackgroundClick}>
+        <div className="upload-modal">
           <h3>Drop your files below, or click the zone to select files</h3>
-          <div className="header-modalDropzone">
+          <div className="upload-dropzone">
           </div>
-          <div>
+          <div className="upload-imagePreviews pure-g">
             {images}
           </div>
         </div>
@@ -28,7 +28,7 @@ class UploaderModal extends Component {
   }
 
   handleBackgroundClick = (event) => {
-    if (event.target.className !== 'header-modalBackground') {
+    if (event.target.className !== 'upload-background') {
       return;
     }
     this.props.hideUpload();
@@ -36,3 +36,4 @@ class UploaderModal extends Component {
 }
 
 export default UploaderModal;
+

@@ -19,8 +19,8 @@ class Uploader extends Component {
 
   render () {
     return (
-      <div className="header-uploader">
-        <span className="header-uploaderButton" onClick={this.showUpload}>⬆ Upload</span>
+      <div className="upload">
+        <span className="upload-button" onClick={this.showUpload}>⬆ Upload</span>
         <UploaderModal images={this.state.images} isUploadOpen={this.state.isUploadOpen} hideUpload={this.hideUpload}/>
       </div>
     );
@@ -30,7 +30,7 @@ class Uploader extends Component {
     e.stopPropagation();
     e.preventDefault();
 
-    if (e.target.className !== 'header-modalDropzone') {
+    if (e.target.className !== 'upload-dropzone') {
       this.hideUpload();
       return;
     }
