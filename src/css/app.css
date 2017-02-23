@@ -1,3 +1,6 @@
+*{
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   padding: 0;
@@ -16,31 +19,62 @@ body {
   align-items: center;
 }
 
-.header h1 {
-  /*align-self: flex-start;*/
-}
 
   .header-uploader {
     margin-left: auto;
   }
 
+  .header-uploaderButton {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+    .header-uploaderButton:hover {
+      background-color: #658802;
+      color: white;
+    }
+
+  .header-modalBackground {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:hsla(0, 0%, 38%, 0.4);
+  }
   .header-modalUpload {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background-color: red;
+    height: 50%;
+    width: 50%;
+    background-color: #222;
+    padding: 3rem;
   }
 
   .header-modalDropzone {
-    width: 90%;
-    min-height: 300px;
-    border: 1px solid green;
+    height: 50%;
+    margin-top: 25%;
+    margin: auto;
+    border: 4px dashed #658802;
   }
 
 @media screen and (max-width: 1000px) {
   .header {
     width: 100%;
   }
+    .header h1 {
+      margin-left: 10px;
+    }
+    .header-uploaderButton {
+      margin-right: 10px;
+    }
+
+    .header-modalUpload {
+      top: 1rem;
+      width: 90%;
+      left: 5%;
+      bottom: 1rem;
+    }
+
 }

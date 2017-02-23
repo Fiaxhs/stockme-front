@@ -5,7 +5,10 @@ class Uploader extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {showUpload: false};
+    this.state = {
+      isUploadOpen: false,
+      images: []
+    };
   }
 
   componentDidMount() {
@@ -17,14 +20,10 @@ class Uploader extends Component {
   render () {
     return (
       <div className="header-uploader">
-        ⬆ Upload
-        <UploaderModal showUpload={this.state.showUpload}/>
+        <span className="header-uploaderButton" onClick={this.showUpload}>⬆ Upload</span>
+        <UploaderModal images={this.state.images} isUploadOpen={this.state.isUploadOpen} hideUpload={this.hideUpload}/>
       </div>
     );
-  }
-
-  _onDragLeave () {
-    this.setState({what: '_onDragLeave'});
   }
 
   _onDrop (e) {
@@ -32,17 +31,31 @@ class Uploader extends Component {
     e.preventDefault();
 
     if (e.target.className !== 'header-modalDropzone') {
-      this.setState({showUpload: false});
+      this.hideUpload();
       return;
     }
-
+    this.handleFiles(e.dataTransfer.files);
   }
 
   _onDragOver (e) {
     e.stopPropagation();
     e.preventDefault();
-    this.setState({showUpload: true})
+    this.showUpload();
   }
+
+  handleFiles = files => {
+    let imageTypes = ['image/png', 'image/jpg', 'image/jpeg'];
+    files = Array.from(files);
+    files.forEach( file => {
+      if (!imageTypes.includes(file.type)) {
+        return;
+      }
+      this.setState({images: this.state.images.concat([file])});
+    });
+  }
+
+  showUpload = () => this.setState({isUploadOpen: true});
+  hideUpload = () => this.setState({isUploadOpen: false});
 }
 
 export default Uploader;
