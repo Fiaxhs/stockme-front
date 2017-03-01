@@ -15,14 +15,17 @@ class UploaderModal extends Component {
 
     return (
       <div className="upload-background" onClick={this.handleBackgroundClick}>
-        <div className="upload-modal">
-          <h3>Drop your files below, or click the zone to select files</h3>
-          <div className="upload-dropzone">
+        <form>
+          <div className="upload-modal">
+            <h3>Drop your files below, or click the zone to select files</h3>
+            <div className="upload-dropzone">
+            </div>
+            <input type="file" name="image" />
+            <div className="upload-imagePreviews pure-g">
+              {images}
+            </div>
           </div>
-          <div className="upload-imagePreviews pure-g">
-            {images}
-          </div>
-        </div>
+        </form>
       </div>
     );
   }

@@ -10,8 +10,8 @@ class UploaderImagePreview extends Component {
 
   render() {
     return (
-      <div className="pure-u-1-6 upload-imageContainer">
-        <img className="upload-imagePreview" alt="" ref={(img) => { this.img = img; }} src="" />
+      <div className="pure-u-1-2 pure-u-xl-1-5 pure-u-md-1-4 pure-u-sm-1-3 upload-imageContainer">
+          <img className="upload-imagePreview" alt="" ref={(img) => { this.img = img; }} src="" />
       </div>
     );
   }
