@@ -9,23 +9,23 @@ class UploaderModal extends Component {
     }
     let images = [];
     // Images
-    this.props.images.forEach(image => {
-      images.push(<UploaderImagePreview file={image} />);
+    this.props.images.forEach((image, index) => {
+      images.push(<UploaderImagePreview file={image} key={index} />);
     });
 
     return (
       <div className="upload-background" onClick={this.handleBackgroundClick}>
-        <form>
-          <div className="upload-modal">
+        <div className="upload-modal">
+          <form action="" method="put">
             <h3>Drop your files below, or click the zone to select files</h3>
-            <div className="upload-dropzone">
+            <div className="upload-dropzone" onClick={this.clickInput}>
             </div>
-            <input type="file" name="image" />
+            <input type="file" name="image" onChange={this.handleFileSelected} className="upload-input" ref={(input) => { this.input = input; }}/>
             <div className="upload-imagePreviews pure-g">
               {images}
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     );
   }
@@ -35,6 +35,14 @@ class UploaderModal extends Component {
       return;
     }
     this.props.hideUpload();
+  }
+
+  clickInput = (event) => {
+    this.input.click();
+  }
+
+  handleFileSelected = (event) => {
+    this.props.handleFiles(event.target.files)
   }
 }
 

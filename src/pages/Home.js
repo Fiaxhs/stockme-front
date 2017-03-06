@@ -11,7 +11,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    query('images').then(images => {
+    query('images?limit=9', ).then(images => {
       this.setState({images: images});
     }).catch( err => console.log(err) );
   }

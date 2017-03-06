@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UploaderModal from './UploaderModal';
+import { query } from '../utils/api';
 
 class Uploader extends Component {
 
@@ -12,21 +13,21 @@ class Uploader extends Component {
   }
 
   componentDidMount() {
-    document.body.addEventListener("dragover", this._onDragOver.bind(this), false);
-    document.body.addEventListener("dragleave", this._onDragOver.bind(this), false);
-    document.body.addEventListener("drop", this._onDrop.bind(this), false);
+    document.body.addEventListener("dragover", this.handleDragoverEvent.bind(this), false);
+    document.body.addEventListener("dragleave", this.handleDragoverEvent.bind(this), false);
+    document.body.addEventListener("drop", this.handleDropEvent.bind(this), false);
   }
 
   render () {
     return (
       <div className="upload">
         <span className="upload-button" onClick={this.showUpload}>⬆ Upload</span>
-        <UploaderModal images={this.state.images} isUploadOpen={this.state.isUploadOpen} hideUpload={this.hideUpload}/>
+        <UploaderModal handleFiles={this.handleFiles} images={this.state.images} isUploadOpen={this.state.isUploadOpen} hideUpload={this.hideUpload}/>
       </div>
     );
   }
 
-  _onDrop (e) {
+  handleDropEvent (e) {
     e.stopPropagation();
     e.preventDefault();
 
@@ -37,12 +38,16 @@ class Uploader extends Component {
     this.handleFiles(e.dataTransfer.files);
   }
 
-  _onDragOver (e) {
+  handleDragoverEvent (e) {
     e.stopPropagation();
     e.preventDefault();
-    this.showUpload();
+    // Prevent drag from within the browser
+    if (e.dataTransfer.types.indexOf("Files") !== -1){
+      this.showUpload();
+    }
   }
 
+  // Deal with dropped files
   handleFiles = files => {
     let imageTypes = ['image/png', 'image/jpg', 'image/jpeg'];
     files = Array.from(files);
@@ -50,10 +55,32 @@ class Uploader extends Component {
       if (!imageTypes.includes(file.type)) {
         return;
       }
-      this.setState({images: this.state.images.concat([file])});
+      // Add images to state, with status "started"
+      this.setState({images: this.state.images.concat([{
+        file,
+        status: 0
+      }])});
+      // Upload
+      this.uploadFile([...this.state.images].pop());
     });
   }
 
+  // Send file to api
+  uploadFile = (file) => {
+    let data = new FormData();
+    data.append("image[image]", file.file);
+
+    query("images", {
+      method: 'POST',
+      body: data
+    }).then(response => {
+      alert("OK")
+    }).catch(e => {
+      alert(e);
+    })
+  }
+
+  // Functions for submodules
   showUpload = () => this.setState({isUploadOpen: true});
   hideUpload = () => this.setState({isUploadOpen: false});
 }
