@@ -6,9 +6,10 @@ class Uploader extends Component {
 
   constructor(props) {
     super(props);
+    this.status_ok = 1;
     this.state = {
       isUploadOpen: false,
-      images: []
+      images: new Map()
     };
   }
 
@@ -55,28 +56,30 @@ class Uploader extends Component {
       if (!imageTypes.includes(file.type)) {
         return;
       }
+      let index = Math.random().toString(36).substring(2);
+      let image = [ index, {file, status: 0} ];
+
       // Add images to state, with status "started"
-      this.setState({images: this.state.images.concat([{
-        file,
-        status: 0
-      }])});
+      this.setState({images: new Map([...this.state.images, image])});
       // Upload
-      this.uploadFile([...this.state.images].pop());
+      this.uploadFile(index);
     });
   }
 
   // Send file to api
-  uploadFile = (file) => {
+  uploadFile = (index) => {
     let data = new FormData();
-    data.append("image[image]", file.file);
+    var image = this.state.images.get(index);
+    debugger;
+    data.append("image[image]", image.file);
 
     query("images", {
       method: 'POST',
       body: data
     }).then(response => {
-      alert("OK")
+      this.setState({images: new Map([...this.state.images, [index, Object.assign({}, image, {status: 1})]])});
     }).catch(e => {
-      alert(e);
+      this.setState({images: new Map([...this.state.images, [index, Object.assign({}, image, {status: 2})]])});
     })
   }
 
