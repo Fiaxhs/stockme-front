@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {browserHistory} from "react-router";
+
 import UploaderModal from './UploaderModal';
 import { query } from '../utils/api';
 
@@ -6,7 +8,11 @@ class Uploader extends Component {
 
   constructor(props) {
     super(props);
+
+    this.status_pending = 0;
     this.status_ok = 1;
+    this.status_fail = 2;
+
     this.state = {
       isUploadOpen: false,
       images: new Map()
@@ -28,6 +34,7 @@ class Uploader extends Component {
     );
   }
 
+  // File dropped
   handleDropEvent (e) {
     e.stopPropagation();
     e.preventDefault();
@@ -39,6 +46,7 @@ class Uploader extends Component {
     this.handleFiles(e.dataTransfer.files);
   }
 
+  // File dragged
   handleDragoverEvent (e) {
     e.stopPropagation();
     e.preventDefault();
@@ -57,7 +65,7 @@ class Uploader extends Component {
         return;
       }
       let index = Math.random().toString(36).substring(2);
-      let image = [ index, {file, status: 0} ];
+      let image = [ index, {file, status: this.status_pending} ];
 
       // Add images to state, with status "started"
       this.setState({images: new Map([...this.state.images, image])});
@@ -70,16 +78,21 @@ class Uploader extends Component {
   uploadFile = (index) => {
     let data = new FormData();
     var image = this.state.images.get(index);
-    debugger;
     data.append("image[image]", image.file);
 
     query("images", {
       method: 'POST',
       body: data
     }).then(response => {
-      this.setState({images: new Map([...this.state.images, [index, Object.assign({}, image, {status: 1})]])});
+      if (this.state.images.size === 1) {
+        browserHistory.push(`/i/${response.identifier}`);
+        this.hideUpload();
+        this.setState({images:new Map()});
+      } else {
+        this.setState({images: new Map([...this.state.images, [index, Object.assign({}, image, {status: this.status_ok})]])});
+      }
     }).catch(e => {
-      this.setState({images: new Map([...this.state.images, [index, Object.assign({}, image, {status: 2})]])});
+      this.setState({images: new Map([...this.state.images, [index, Object.assign({}, image, {status: this.status_fail})]])});
     })
   }
 

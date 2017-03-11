@@ -1,0 +1,14 @@
+.image{
+  width: 960px;
+  margin: auto;
+}
+
+.image-container{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.image-image  /* Plus loin que la nuit et le jour */{
+  max-width: 100%;
+}

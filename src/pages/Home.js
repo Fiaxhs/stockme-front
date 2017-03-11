@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { query } from '../utils/api';
+import HomeImage from '../components/HomeImage'
+
 import '../css/home.css';
 
 class Home extends Component {
@@ -11,7 +13,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    query('images?limit=9', ).then(images => {
+    query('images?limit=24', ).then(images => {
       this.setState({images: images});
     }).catch( err => console.log(err) );
   }
@@ -20,7 +22,7 @@ class Home extends Component {
     return (
       <div className="home pure-g">
         {this.state.images.map((image, idx) => {
-          return <img src={image.thumb_url} alt={image.title} key={idx} />
+          return <HomeImage image={image} key={idx} />;
         })}
       </div>
     );
