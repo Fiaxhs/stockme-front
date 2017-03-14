@@ -26,18 +26,57 @@ class Image extends Component {
   }
 
   render () {
-    let img = null;
-    if (this.state.image) {
-      img = <img className="image-image" src={this.state.image.small_url} alt={this.state.image.title} />
+    if (!this.state.image) {
+      return (<div></div>);
     }
+    let img = this.state.image;
     return (
       <div className="image">
         <div className="image-container">
-          {img}
+          <img className="image-image" src={img.small_url} alt={img.title} />
         </div>
+        <aside className="image-album">
+          SALUT
+        </aside>
+        <aside className="image-urls">
+          <div className="image-urlsWrapper">
+            <h3>Direct links</h3>
+            <ul className="image-urlList">
+              <li>
+                This page
+                <input className="image-urlInput" type="text" onClick={this.copyText} value={window.location}/>
+              </li>
+              <li>
+                Image
+                <input className="image-urlInput" type="text" onClick={this.copyText} value={img.url}/>
+              </li>
+            </ul>
+            <h3>Forum (phpBB)</h3>
+            <ul className="image-urlList">
+              <li>
+                Thumb
+                <input className="image-urlInput" type="text" onClick={this.copyText} value={`[url=${window.location}][img]${img.thumb_url}[/img][/url]`}/>
+              </li>
+              <li>
+                Medium
+                <input className="image-urlInput" type="text" onClick={this.copyText} value={`[url=${window.location}][img]${img.small_url}[/img][/url]`}/>
+              </li>
+              <li>
+                Large
+                <input className="image-urlInput" type="text" onClick={this.copyText} value={`[url=${window.location}][img]${img.url}[/img][/url]`}/>
+              </li>
+            </ul>
+          </div>
+        </aside>
       </div>
     );
+  }
+
+  copyText(event) {
+    event.target.select();
+    document.execCommand('copy');
   }
 }
 
 export default Image;
+

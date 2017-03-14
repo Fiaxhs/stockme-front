@@ -1,14 +1,74 @@
 .image{
-  width: 960px;
+  width: 100%;
   margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+
 }
 
 .image-container{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
+  order: 2;
+  flex:0 0 960px;
 
+}
 .image-image  /* Plus loin que la nuit et le jour */{
   max-width: 100%;
+  display: block;
+  margin: auto;
 }
+
+.image-album,
+.image-urls {
+  flex:1;
+}
+.image-album {
+  order: 1;
+}
+.image-urls {
+  order: 3;
+  color: #fff;
+}
+
+.image-urlsWrapper {
+  padding-left: 1rem;
+}
+
+  .image-urlList {
+    list-style-type: none;
+  }
+
+  .image-urlInput {
+    display: block;
+    color: #222;
+  }
+
+.image-title-empty {
+  color: #444;
+}
+
+
+
+/* 960 + 240 mini de chaque coté = 1450*/
+@media screen and (max-width: 1450px) {
+  .image{
+    width: 960px;
+  }
+
+  .image-container{order: 1;}
+  .image-album {order: 2;}
+  .image-urls {order: 3;}
+}
+
+@media screen and (max-width: 960px) {
+  .image{
+    width: 100%;
+  }
+
+  .image-container{
+    width: 100%;
+    flex:1 0 100%;
+  }
+}
+
