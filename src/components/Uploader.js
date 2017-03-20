@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {browserHistory} from "react-router";
+import {browserHistory} from 'react-router';
+import * as Cookies from 'js-cookie';
 
 import UploaderModal from './UploaderModal';
 import { query } from '../utils/api';
@@ -20,9 +21,9 @@ class Uploader extends Component {
   }
 
   componentDidMount() {
-    document.body.addEventListener("dragover", this.handleDragoverEvent.bind(this), false);
-    document.body.addEventListener("dragleave", this.handleDragoverEvent.bind(this), false);
-    document.body.addEventListener("drop", this.handleDropEvent.bind(this), false);
+    document.body.addEventListener('dragover', this.handleDragoverEvent.bind(this), false);
+    document.body.addEventListener('dragleave', this.handleDragoverEvent.bind(this), false);
+    document.body.addEventListener('drop', this.handleDropEvent.bind(this), false);
   }
 
   render () {
@@ -51,7 +52,7 @@ class Uploader extends Component {
     e.stopPropagation();
     e.preventDefault();
     // Prevent drag from within the browser
-    if (e.dataTransfer.types.indexOf("Files") !== -1){
+    if (e.dataTransfer.types.indexOf('Files') !== -1){
       this.showUpload();
     }
   }
@@ -77,23 +78,51 @@ class Uploader extends Component {
   // Send file to api
   uploadFile = (index) => {
     let data = new FormData();
-    var image = this.state.images.get(index);
-    data.append("image[image]", image.file);
+    let image = this.state.images.get(index);
+    data.append('image[image]', image.file);
+    let headers = new Headers();
+    headers.append('X-Image-Secret', this.getSecret());
 
-    query("images", {
+    query('images', {
       method: 'POST',
+      headers,
       body: data
     }).then(response => {
       if (this.state.images.size === 1) {
+        // Save secret and image.
+        this.setSecret(response.secret);
+        this.addImageToCookies(response.identifier);
+
+        // Go to image
         browserHistory.push(`/i/${response.identifier}`);
+
+        // Reset state
         this.hideUpload();
         this.setState({images:new Map()});
+
       } else {
         this.setState({images: new Map([...this.state.images, [index, Object.assign({}, image, {status: this.status_ok})]])});
       }
     }).catch(e => {
       this.setState({images: new Map([...this.state.images, [index, Object.assign({}, image, {status: this.status_fail})]])});
     })
+  }
+
+  // Secret key to update/delete pics
+  getSecret = () => Cookies.get('secret')
+
+  setSecret = (secret, force = false) => {
+    if (force || !this.getSecret()) {
+      Cookies.set('secret', secret);
+      Cookies.set('images', '')
+    }
+  }
+
+  addImageToCookies = (id) => {
+    let images = Cookies.get('images');
+    images = images ? images.split(',') : [];
+    images.push(id);
+    Cookies.set('images', images.join(','));
   }
 
   // Functions for submodules
