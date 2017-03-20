@@ -22,26 +22,26 @@ class Image extends Component {
           <h3>Direct links</h3>
           <ul className="image-urlList">
             <li>
-              This page
+              <span className="image-urlLabel">This page</span>
               <input className="image-urlInput" type="text" onClick={this.copyText} value={window.location}/>
             </li>
             <li>
-              Image
+              <span className="image-urlLabel">Image</span>
               <input className="image-urlInput" type="text" onClick={this.copyText} value={img.url}/>
             </li>
           </ul>
           <h3>Forum (phpBB)</h3>
           <ul className="image-urlList">
             <li>
-              Thumb
+              <span className="image-urlLabel">Thumb</span>
               <input className="image-urlInput" type="text" onClick={this.copyText} value={`[url=${window.location}][img]${img.thumb_url}[/img][/url]`}/>
             </li>
             <li>
-              Medium
+              <span className="image-urlLabel">Medium</span>
               <input className="image-urlInput" type="text" onClick={this.copyText} value={`[url=${window.location}][img]${img.small_url}[/img][/url]`}/>
             </li>
             <li>
-              Large
+              <span className="image-urlLabel">Large</span>
               <input className="image-urlInput" type="text" onClick={this.copyText} value={`[url=${window.location}][img]${img.url}[/img][/url]`}/>
             </li>
           </ul>

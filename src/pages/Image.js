@@ -35,9 +35,7 @@ class Image extends Component {
     return (
       <div className="image">
         <ImageImage image={img} />
-        <aside className="image-album">
-          SALUT
-        </aside>
+        <aside className="image-album"></aside>
         <ImageUrls image={img} />
       </div>
     );

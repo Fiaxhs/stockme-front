@@ -5,7 +5,7 @@
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
-
+  margin-top: 40px;
 }
 
 .image-container{
@@ -28,7 +28,7 @@
 }
 .image-urls {
   order: 3;
-  color: #fff;
+  color: #ccc;
 }
 
 .image-urlsWrapper {
@@ -37,11 +37,27 @@
 
   .image-urlList {
     list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .image-urlList li {
+    margin: 8px 0;
   }
 
   .image-urlInput {
-    display: block;
+    display: inline-block;
     color: #222;
+    height: 1.8rem;
+    font-size: 1.3rem;
+    background-color: #222;
+    border:1px solid #658802;
+    color:#ddd;
+  }
+
+  .image-urlLabel {
+    width: 10rem;
+    display: inline-block;
   }
 
 .image-title-empty {

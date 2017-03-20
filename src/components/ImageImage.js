@@ -9,6 +9,7 @@ class ImageImage extends Component {
     let img = this.props.image;
     return (
       <div className="image-container">
+        <h1 className={`image-Title`}>{img.title ? img.title : 'Pouete'}</h1>
         <img className="image-image" src={img.small_url} alt={img.title} />
       </div>
     );
