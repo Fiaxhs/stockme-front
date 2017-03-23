@@ -12,10 +12,12 @@ class Home extends Component {
     };
   }
 
+  componentWillReceiveProps(props) {
+    this.loadImages();
+  }
+
   componentDidMount() {
-    query('images?limit=24', ).then(images => {
-      this.setState({images: images});
-    }).catch( err => console.log(err) );
+    this.loadImages();
   }
 
   render () {
@@ -26,6 +28,12 @@ class Home extends Component {
         })}
       </div>
     );
+  }
+
+  loadImages = () => {
+    query('images?limit=24', ).then(images => {
+      this.setState({images: images});
+    }).catch( err => console.log(err) );
   }
 }
 

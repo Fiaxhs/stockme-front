@@ -125,17 +125,23 @@ h1 { font-size: 2.4rem; }
   position: relative;
 }
 
-.globalStyle-editinplacePen {
+.material-icons.globalStyle-editinplacePen {
   position: absolute;
   left: -24px;
-  height: 24px;
+  top:0;
+  height: 30px;
   width: 24px;
   font-size: 2.4rem;
   cursor: pointer;
   color: #444;
   font-weight: normal;
+  opacity: 0;
+}
+.globalStyle-editinplace:hover .globalStyle-editinplacePen{
+  opacity: 1;
 }
 .globalStyle-editinplacePen:hover {
+  opacity: 1;
   color: #fff;
   fill: #111;
 }

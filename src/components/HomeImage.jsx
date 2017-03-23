@@ -3,11 +3,11 @@ import { Link } from 'react-router';
 
 class HomeImage extends Component {
 
-  componentDidMount() {
-    let reader = new FileReader();
-    reader.onload = e => this.img.src = e.target.result;
-    reader.readAsDataURL(this.props.file.file);
-  }
+  // componentDidMount() {
+  //   let reader = new FileReader();
+  //   reader.onload = e => this.img.src = e.target.result;
+  //   reader.readAsDataURL(this.props.file.file);
+  // }
 
   render() {
     return (
