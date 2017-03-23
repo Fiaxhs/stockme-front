@@ -10,8 +10,10 @@ class App extends Component {
     return (
       <div className="main">
         <div className="header">
-          <h1><Link to="/">Stockme</Link></h1>
-          <Uploader />
+          <div className="header-wrapper">
+            <h1><Link to="/">Stockme</Link></h1>
+            <Uploader />
+          </div>
         </div>
         {this.props.children}
       </div>

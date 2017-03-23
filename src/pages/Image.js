@@ -34,11 +34,31 @@ class Image extends Component {
     let img = this.state.image;
     return (
       <div className="image">
-        <ImageImage image={img} />
+        <ImageImage image={img} updateDescription={this.updateDescription} updateTitle={this.updateTitle} />
         <aside className="image-album"></aside>
         <ImageUrls image={img} />
       </div>
     );
+  }
+
+  updateImage = (field, value) => {
+    let body = new FormData();
+    body.append(`image[${field}]`, value);
+
+    query(`images/${this.state.image.identifier}`, {
+      'method': 'PATCH',
+      body
+    }).then(response => {
+      this.setState({image: response});
+    }).catch(() => {});
+  }
+
+  updateTitle = (text) => {
+    this.updateImage('title', text);
+  }
+
+  updateDescription = (text) => {
+    this.updateImage('description', text);
   }
 }
 

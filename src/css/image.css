@@ -11,8 +11,8 @@
 .image-container{
   order: 2;
   flex:0 0 960px;
-
 }
+
 .image-image  /* Plus loin que la nuit et le jour */{
   max-width: 100%;
   display: block;
@@ -47,12 +47,14 @@
 
   .image-urlInput {
     display: inline-block;
-    color: #222;
-    height: 1.8rem;
+    height: 2.2rem;
     font-size: 1.3rem;
-    background-color: #222;
-    border:1px solid #658802;
+    background-color: #000;
+    border:0;
     color:#ddd;
+    cursor: pointer;
+    padding: 1.2rem 0.8rem;
+    text-overflow: ellipsis;
   }
 
   .image-urlLabel {
@@ -60,9 +62,14 @@
     display: inline-block;
   }
 
-.image-title-empty {
-  color: #444;
-}
+  .image-title {
+    position: relative;
+  }
+
+  .image-description {
+    position: relative;
+  }
+
 
 
 

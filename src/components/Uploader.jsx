@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {browserHistory} from 'react-router';
-import * as Cookies from 'js-cookie';
+import Cookies from 'js-cookie';
 
 import UploaderModal from './UploaderModal';
 import { query } from '../utils/api';
@@ -77,15 +77,13 @@ class Uploader extends Component {
 
   // Send file to api
   uploadFile = (index) => {
-    let data = new FormData();
     let image = this.state.images.get(index);
+
+    let data = new FormData();
     data.append('image[image]', image.file);
-    let headers = new Headers();
-    headers.append('X-Image-Secret', this.getSecret());
 
     query('images', {
       method: 'POST',
-      headers,
       body: data
     }).then(response => {
       if (this.state.images.size === 1) {

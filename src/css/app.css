@@ -1,7 +1,7 @@
 *{
   box-sizing: border-box;
 }
-html { font-size: 62.5%; } 
+html { font-size: 62.5%; }
 body {
   margin: 0;
   padding: 0;
@@ -16,6 +16,10 @@ h1 { font-size: 2.4rem; }
   min-height: 800px;
 }
 .header {
+  background-color: #181818;
+  border-bottom: 1px solid #282828;
+}
+.header-wrapper {
   width: 960px;
   margin: auto;
   color: white;
@@ -63,6 +67,7 @@ h1 { font-size: 2.4rem; }
     padding: 3rem;
     display: flex;
     flex-direction: column;
+    z-index: 10;
   }
 
   .upload-dropzone {
@@ -112,8 +117,31 @@ h1 { font-size: 2.4rem; }
   }
 
 
+/*********************************************************
+ * Global styles
+ */
+
+.globalStyle-editinplace{
+  position: relative;
+}
+
+.globalStyle-editinplacePen {
+  position: absolute;
+  left: -24px;
+  height: 24px;
+  width: 24px;
+  font-size: 2.4rem;
+  cursor: pointer;
+  color: #444;
+  font-weight: normal;
+}
+.globalStyle-editinplacePen:hover {
+  color: #fff;
+  fill: #111;
+}
+
 @media screen and (max-width: 960px) {
-  .header {
+  .header-wrapper {
     width: 100%;
   }
     .header h1 {
@@ -129,4 +157,72 @@ h1 { font-size: 2.4rem; }
       left: 5%;
       bottom: 1rem;
     }
+}
+
+
+/*********************************************************
+ * Material Icons
+ */
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url(../fonts/MaterialIcons-Regular.woff2) format('woff2'),
+       url(../fonts/MaterialIcons-Regular.woff) format('woff'),
+       url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+/*********************************************************
+ * Pace
+ */
+
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: #658802;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 2px;
 }
