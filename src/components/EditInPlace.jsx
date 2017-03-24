@@ -11,13 +11,19 @@ class EditInPlace extends Component {
     this.input = null;
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.editing) {
+      this.input.focus();
+    }
+  }
+
   render () {
     let center;
     if (this.state.editing) {
       if (this.props.textarea) {
         center = <textarea ref={(input) => { this.input = input; }} defaultValue={this.props.text || ''}></textarea>;
       } else {
-        center = <input ref={(input) => { this.input = input; }} type="text" defaultValue={this.props.text || ''}/>;
+        center = <input onKeyUp={this.handleKeyUp} ref={(input) => { this.input = input; }} type="text" defaultValue={this.props.text || ''}/>;
       }
     } else {
       if (this.props.textarea) {
@@ -42,6 +48,13 @@ class EditInPlace extends Component {
       this.props.update(this.input.value);
     }
     this.setState({editing: !this.state.editing});
+  }
+
+  handleKeyUp = (event) => {
+    // Enter
+    if (event.keyCode && event.keyCode === 13) {
+      this.toggleEdit();
+    }
   }
 }
 

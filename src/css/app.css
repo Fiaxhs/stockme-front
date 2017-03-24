@@ -125,26 +125,38 @@ h1 { font-size: 2.4rem; }
   position: relative;
 }
 
-.material-icons.globalStyle-editinplacePen {
-  position: absolute;
-  left: -24px;
-  top:0;
-  height: 30px;
-  width: 24px;
-  font-size: 2.4rem;
-  cursor: pointer;
-  color: #444;
-  font-weight: normal;
-  opacity: 0;
-}
-.globalStyle-editinplace:hover .globalStyle-editinplacePen{
-  opacity: 1;
-}
-.globalStyle-editinplacePen:hover {
-  opacity: 1;
-  color: #fff;
-  fill: #111;
-}
+  .material-icons.globalStyle-editinplacePen {
+    position: absolute;
+    left: -28px;
+    top:0;
+    height: 30px;
+    width: 24px;
+    font-size: 2.4rem;
+    cursor: pointer;
+    color: #444;
+    font-weight: normal;
+    opacity: 0;
+  }
+  .globalStyle-editinplace:hover .globalStyle-editinplacePen{
+    opacity: 1;
+  }
+  .globalStyle-editinplacePen:hover {
+    opacity: 1;
+    color: #fff;
+    fill: #111;
+  }
+  .globalStyle-editinplace input {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    color: #000;
+    width: 100%;
+  }
+  .globalStyle-editinplace textarea {
+    width: 100%;
+    min-height: 140px;
+    color: #000;
+  }
 
 @media screen and (max-width: 960px) {
   .header-wrapper {
