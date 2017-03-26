@@ -1,7 +1,9 @@
 *{
   box-sizing: border-box;
 }
+
 html { font-size: 62.5%; }
+
 body {
   margin: 0;
   padding: 0;
@@ -15,6 +17,7 @@ h1 { font-size: 2.4rem; }
 #root{
   min-height: 800px;
 }
+
 .header {
   background-color: #181818;
   border-bottom: 1px solid #282828;
@@ -33,89 +36,92 @@ h1 { font-size: 2.4rem; }
   font-size: 3.2rem;
 }
 
+/*********************************************************
+ * Upload
+ */
+
 .upload {
   margin-left: auto;
 }
 
-  .upload-button {
-    display: inline-block;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 1.6rem;
-  }
-    .upload-button:hover {
-      background-color: #658802;
-      color: white;
-    }
-
-  .upload-background {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color:hsla(0, 0%, 38%, 0.4);
-  }
-  .upload-modal {
-    min-height: 50%;
-    max-height: 100%;
-    width: 50%;
-    background-color: #222;
-    padding: 3rem;
-    display: flex;
-    flex-direction: column;
-    z-index: 10;
+.upload-button {
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+  .upload-button:hover {
+    background-color: #658802;
+    color: white;
   }
 
-  .upload-dropzone {
-    flex-grow: 1;
-    min-height: 80px;
-    border: 4px dashed #658802;
-    margin-bottom: 1rem;
-  }
+.upload-background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color:hsla(0, 0%, 38%, 0.4);
+  z-index: 999;
+}
+.upload-modal {
+  min-height: 50%;
+  max-height: 100%;
+  width: 50%;
+  background-color: #222;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+}
 
-  .upload-imagePreviews{
-    overflow-y: auto;
-  }
+.upload-dropzone {
+  flex-grow: 1;
+  min-height: 80px;
+  border: 4px dashed #658802;
+  margin-bottom: 1rem;
+}
 
-  .upload-imageContainer{
-    padding: 0.2rem;
-    font-size: 0;
-    position: relative;
-  }
-    .upload-statuspending,
-    .upload-statusfail,
-    .upload-statusok {
-      position: absolute;
-      top: 5px;
-      right: 10px;
-      font-size: 1rem;
-      text-shadow: 0px 0px 4px black;
-    }
-    .upload-statuspending:before{
-      content: '⏳';
-    }
-    .upload-statusfail:before{
-      content: '👎';
-    }
-    .upload-statusok:before{
-      content: '👍';
-    }
+.upload-imagePreviews{
+  overflow-y: auto;
+}
 
-  .upload-imagePreview {
-    object-fit: cover;
-    width: 100%;
-    height: 140px;
-    display: flex;
-  }
+.upload-imageContainer{
+  padding: 0.2rem;
+  font-size: 0;
+  position: relative;
+}
+.upload-statuspending,
+.upload-statusfail,
+.upload-statusok {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 1rem;
+  text-shadow: 0px 0px 4px black;
+}
+.upload-statuspending:before{
+  content: '⏳';
+}
+.upload-statusfail:before{
+  content: '👎';
+}
+.upload-statusok:before{
+  content: '👍';
+}
 
-  .upload-input {
-    display: none;
-  }
+.upload-imagePreview {
+  object-fit: cover;
+  width: 100%;
+  height: 140px;
+  display: flex;
+}
 
+.upload-input {
+  display: none;
+}
 
 /*********************************************************
  * Global styles
@@ -125,38 +131,38 @@ h1 { font-size: 2.4rem; }
   position: relative;
 }
 
-  .material-icons.globalStyle-editinplacePen {
-    position: absolute;
-    left: -28px;
-    top:0;
-    height: 30px;
-    width: 24px;
-    font-size: 2.4rem;
-    cursor: pointer;
-    color: #444;
-    font-weight: normal;
-    opacity: 0;
-  }
-  .globalStyle-editinplace:hover .globalStyle-editinplacePen{
-    opacity: 1;
-  }
-  .globalStyle-editinplacePen:hover {
-    opacity: 1;
-    color: #fff;
-    fill: #111;
-  }
-  .globalStyle-editinplace input {
-    padding: 0;
-    margin: 0;
-    border: 0;
-    color: #000;
-    width: 100%;
-  }
-  .globalStyle-editinplace textarea {
-    width: 100%;
-    min-height: 140px;
-    color: #000;
-  }
+.material-icons.globalStyle-editinplacePen {
+  position: absolute;
+  left: -28px;
+  top:0;
+  height: 30px;
+  width: 24px;
+  font-size: 2.4rem;
+  cursor: pointer;
+  color: #444;
+  font-weight: normal;
+  opacity: 0;
+}
+.globalStyle-editinplace:hover .globalStyle-editinplacePen{
+  opacity: 1;
+}
+.globalStyle-editinplacePen:hover {
+  opacity: 1;
+  color: #fff;
+  fill: #111;
+}
+.globalStyle-editinplace input {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  color: #000;
+  width: 100%;
+}
+.globalStyle-editinplace textarea {
+  width: 100%;
+  min-height: 140px;
+  color: #000;
+}
 
 @media screen and (max-width: 960px) {
   .header-wrapper {
@@ -176,7 +182,6 @@ h1 { font-size: 2.4rem; }
       bottom: 1rem;
     }
 }
-
 
 /*********************************************************
  * Material Icons

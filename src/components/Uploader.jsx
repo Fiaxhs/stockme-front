@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {browserHistory} from 'react-router';
+import { browserHistory } from 'react-router';
 import Cookies from 'js-cookie';
 
 import UploaderModal from './UploaderModal';
@@ -86,19 +86,19 @@ class Uploader extends Component {
       method: 'POST',
       body: data
     }).then(response => {
-      if (this.state.images.size === 1) {
-        // Save secret and image.
-        this.setSecret(response.secret);
-        this.addImageToCookies(response.identifier);
+      // Save secret and image.
+      this.setSecret(response.secret);
+      this.addImageToCookies(response.identifier);
 
+      if (this.state.images.size === 1) {
         // Go to image
         browserHistory.push(`/i/${response.identifier}`);
 
         // Reset state
         this.hideUpload();
         this.setState({images:new Map()});
-
       } else {
+        // Add to temp album
         this.setState({images: new Map([...this.state.images, [index, Object.assign({}, image, {status: this.status_ok})]])});
       }
     }).catch(e => {
@@ -111,8 +111,8 @@ class Uploader extends Component {
 
   setSecret = (secret, force = false) => {
     if (force || !this.getSecret()) {
-      Cookies.set('secret', secret);
-      Cookies.set('images', '')
+      Cookies.set('secret', secret, {expires: 30});
+      Cookies.set('images', '', {expires: 30})
     }
   }
 
@@ -120,7 +120,7 @@ class Uploader extends Component {
     let images = Cookies.get('images');
     images = images ? images.split(',') : [];
     images.push(id);
-    Cookies.set('images', images.join(','));
+    Cookies.set('images', images.join(','), {expires: 30});
   }
 
   // Functions for submodules

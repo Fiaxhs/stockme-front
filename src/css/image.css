@@ -26,6 +26,38 @@
 .image-album {
   order: 1;
 }
+
+.image-urlInput {
+  display: inline-block;
+  height: 2.2rem;
+  font-size: 1.3rem;
+  background-color: #000;
+  border:0;
+  color:#ddd;
+  cursor: pointer;
+  text-indent: 0.5rem;
+  text-overflow: ellipsis;
+}
+
+.image-urlLabel {
+  width: 10rem;
+  display: inline-block;
+}
+
+.image-title {
+  position: relative;
+}
+
+
+.image-description {
+  width: 100%;
+  padding: 2rem 0;
+}
+
+/*********************************************************
+ * Urls
+ */
+
 .image-urls {
   order: 3;
   color: #ccc;
@@ -35,44 +67,51 @@
   padding-left: 1rem;
 }
 
-  .image-urlList {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
+.image-urlList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 
-  .image-urlList li {
-    margin: 8px 0;
-  }
+.image-urlList li {
+  margin: 8px 0;
+}
 
-  .image-urlInput {
-    display: inline-block;
-    height: 2.2rem;
-    font-size: 1.3rem;
-    background-color: #000;
-    border:0;
-    color:#ddd;
-    cursor: pointer;
-    padding: 1.2rem 0.8rem;
-    text-overflow: ellipsis;
-  }
+/*********************************************************
+ * Admin
+ */
 
-  .image-urlLabel {
-    width: 10rem;
-    display: inline-block;
-  }
+.image-admin {
+  padding-left: 1rem;
+}
 
-  .image-title {
-    position: relative;
-  }
+.image-adminWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
-  .image-description {
-    width: 100%;
-    padding: 2rem 0;
-  }
+.image-adminButton {
+  display: inline-flex;
+  font-size: 1.4rem;
+  padding: 7px 10px;
+  text-align: left;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  line-height: 1.4rem;
+}
+.image-adminButton .material-icons{
+  margin-right: 0.3rem;
+}
 
+.image-adminButton:hover {
+  background-color: #658802;
+  color: white;
+}
 
-
+/*********************************************************
+ * Responsive overrides
+ */
 
 /* 960 + 240 mini de chaque coté = 1450*/
 @media screen and (max-width: 1450px) {

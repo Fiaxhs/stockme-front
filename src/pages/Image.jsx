@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import Cookies from 'js-cookie';
 import { query } from '../utils/api';
 
 import ImageImage from '../components/ImageImage'
+import ImageAdmin from '../components/ImageAdmin'
 import ImageUrls from '../components/ImageUrls'
 import '../css/image.css';
 
@@ -9,7 +11,8 @@ class Image extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: null
+      image: null,
+      canEdit: false
     };
   }
 
@@ -24,6 +27,7 @@ class Image extends Component {
   fetchImage(identifier) {
     query(`images/${identifier}`).then(image => {
       this.setState({image: image});
+      this.setState({canEdit: this.userOwnsImage(identifier)});
     }).catch( err => console.log(err) );
   }
 
@@ -34,9 +38,12 @@ class Image extends Component {
     let img = this.state.image;
     return (
       <div className="image">
-        <ImageImage image={img} updateDescription={this.updateDescription} updateTitle={this.updateTitle} />
+        <ImageImage canEdit={this.state.canEdit} image={img} updateDescription={this.updateDescription} updateTitle={this.updateTitle} />
         <aside className="image-album"></aside>
-        <ImageUrls image={img} />
+        <aside className="image-urls">
+          <ImageUrls image={img} />
+          {this.state.canEdit && <ImageAdmin updatePrivate={this.updatePrivate} image={img} />}
+        </aside>
       </div>
     );
   }
@@ -59,6 +66,15 @@ class Image extends Component {
 
   updateDescription = (text) => {
     this.updateImage('description', text);
+  }
+
+  updatePrivate = () => {
+    this.updateImage('private', !this.state.image.private);
+  }
+
+  userOwnsImage (identifier) {
+    let images = (Cookies.get('images') || '').split(',');
+    return images.includes(identifier);
   }
 }
 

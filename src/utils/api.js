@@ -10,10 +10,14 @@ const query = (url, options = {}) => {
 
   return fetch(`http://localhost:4000/${url}`, options)
   .then(response => {
-    if (response.status !== 200 && response.status !== 201) {
-      throw response.error;
-    } else {
+    // OK
+    if (response.status === 200 || response.status === 201) {
       return response.json();
+    // No content
+    } else if (response.status === 204) {
+      return {};
+    } else {
+      throw response.error;
     }
   }).catch(err => {
       throw err;
