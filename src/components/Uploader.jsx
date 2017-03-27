@@ -69,9 +69,10 @@ class Uploader extends Component {
       let image = [ index, {file, status: this.status_pending} ];
 
       // Add images to state, with status "started"
-      this.setState({images: new Map([...this.state.images, image])});
-      // Upload
-      this.uploadFile(index);
+      this.setState(
+        {images: new Map([...this.state.images, image])},
+        // Upload
+        () => {this.uploadFile(index);});
     });
   }
 
