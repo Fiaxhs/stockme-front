@@ -23,6 +23,7 @@ class UploaderModal extends Component {
           <div className="upload-imagePreviews pure-g">
             {images}
           </div>
+          {this.props.images.size > 1 && <div className="" onClick={this.props.createAlbum}>See album</div>}
         </div>
       </div>
     );

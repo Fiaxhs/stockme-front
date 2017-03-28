@@ -30,7 +30,12 @@ class Uploader extends Component {
     return (
       <div className="upload">
         <span className="upload-button" onClick={this.showUpload}>⬆ Upload</span>
-        <UploaderModal handleFiles={this.handleFiles} images={this.state.images} isUploadOpen={this.state.isUploadOpen} hideUpload={this.hideUpload}/>
+        <UploaderModal
+          createAlbum={this.createAlbum}
+          handleFiles={this.handleFiles}
+          images={this.state.images}
+          isUploadOpen={this.state.isUploadOpen}
+          hideUpload={this.hideUpload}/>
       </div>
     );
   }
@@ -100,11 +105,37 @@ class Uploader extends Component {
         this.setState({images:new Map()});
       } else {
         // Add to temp album
-        this.setState({images: new Map([...this.state.images, [index, Object.assign({}, image, {status: this.status_ok})]])});
+        this.setState({
+          images: new Map([
+            ...this.state.images,
+            [index, Object.assign({}, image, {
+              identifier: response.identifier,
+              status: this.status_ok
+            })]
+          ])
+        });
       }
     }).catch(e => {
       this.setState({images: new Map([...this.state.images, [index, Object.assign({}, image, {status: this.status_fail})]])});
     })
+  }
+
+  // Album creation
+  createAlbum = () => {
+    let body = new FormData();
+    this.state.images.forEach( (image, index) => {
+      if (image.identifier) {
+        body.append('album[images_ids][]', image.identifier);
+      }
+    });
+
+    query('albums',
+    {
+      method: 'POST',
+      body
+    }).then( (response) => {
+      browserHistory.push(`/a/${response.identifier}`);
+    });
   }
 
   // Secret key to update/delete pics
