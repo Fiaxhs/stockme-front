@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
-import { query } from '../utils/api';
+import { browserHistory } from 'react-router';
 
+import { query } from '../utils/api';
 import ImageImage from '../components/ImageImage'
 import ImageAdmin from '../components/ImageAdmin'
 import ImageUrls from '../components/ImageUrls'
@@ -42,7 +43,7 @@ class Image extends Component {
         <aside className="image-album"></aside>
         <aside className="image-urls">
           <ImageUrls image={img} />
-          {this.state.canEdit && <ImageAdmin updatePrivate={this.updatePrivate} image={img} />}
+          {this.state.canEdit && <ImageAdmin deleteImage={this.deleteImage} updatePrivate={this.updatePrivate} image={img} />}
         </aside>
       </div>
     );
@@ -75,6 +76,14 @@ class Image extends Component {
   userOwnsImage (identifier) {
     let images = (Cookies.get('images') || '').split(',');
     return images.includes(identifier);
+  }
+
+  deleteImage = () => {
+    query(`images/${this.state.image.identifier}`, {
+      method: 'DELETE'
+    }).then(() => {
+      browserHistory.push(`/`);
+    });
   }
 }
 

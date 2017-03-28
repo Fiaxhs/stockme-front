@@ -22,6 +22,7 @@ class ConfirmButton extends Component {
   confirm = () => {
     if (this.state.confirming) {
       this.props.confirm();
+      this.reset();
     } else {
       this.setState({
         width: ReactDOM.findDOMNode(this.refs.span).getBoundingClientRect().width
@@ -41,10 +42,14 @@ class ConfirmButton extends Component {
       if (event.target !== span && event.target.parentNode !== span) {
         event.stopPropagation();
         event.preventDefault();
-        document.body.removeEventListener('click', this.handleCancel);
-        this.setState({confirming: false});
+        this.reset();
       }
     }
+  }
+
+  reset = () => {
+    document.body.removeEventListener('click', this.handleCancel);
+    this.setState({confirming: false});
   }
 }
 

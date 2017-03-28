@@ -99,10 +99,7 @@ class Uploader extends Component {
       if (this.state.images.size === 1) {
         // Go to image
         browserHistory.push(`/i/${response.identifier}`);
-
-        // Reset state
-        this.hideUpload();
-        this.setState({images:new Map()});
+        this.resetState();
       } else {
         // Add to temp album
         this.setState({
@@ -120,6 +117,11 @@ class Uploader extends Component {
     })
   }
 
+  resetState () {
+    this.hideUpload();
+    this.setState({images:new Map()});
+  }
+
   // Album creation
   createAlbum = () => {
     let body = new FormData();
@@ -129,12 +131,10 @@ class Uploader extends Component {
       }
     });
 
-    query('albums',
-    {
-      method: 'POST',
-      body
-    }).then( (response) => {
+    query('albums', { method: 'POST', body }).then( (response) => {
+      this.addAlbumToCookies(response.identifier);
       browserHistory.push(`/a/${response.identifier}`);
+      this.resetState();
     });
   }
 
@@ -148,11 +148,14 @@ class Uploader extends Component {
     }
   }
 
-  addImageToCookies = (id) => {
-    let images = Cookies.get('images');
-    images = images ? images.split(',') : [];
-    images.push(id);
-    Cookies.set('images', images.join(','), {expires: 30});
+  addImageToCookies = (id) => this.addToCookies(id, 'images')
+  addAlbumToCookies = (id) => this.addToCookies(id, 'albums')
+
+  addToCookies = (id, kind) => {
+    let thingies = Cookies.get(kind);
+    thingies = thingies ? thingies.split(',') : [];
+    thingies.push(id);
+    Cookies.set(kind, thingies.join(','), {expires: 30});
   }
 
   // Functions for submodules

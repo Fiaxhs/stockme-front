@@ -55,6 +55,42 @@
 }
 
 /*********************************************************
+ * Album
+ */
+
+.image-album {
+  margin-top: 60px;
+}
+
+.album {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.album-imageBlock{
+  padding: 0.4rem;
+}
+
+.album-image{
+  border: 2px solid transparent;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.album-imageSelected, 
+.album-imageBlock:hover .album-image{
+  border: 2px solid #658802;
+}
+
+.album-imageContainer{
+  display: inline-block;
+  height: 100px;
+  /*width: 100px;*/
+}
+
+/*********************************************************
  * Urls
  */
 
