@@ -23,7 +23,11 @@ class UploaderModal extends Component {
           <div className="upload-imagePreviews pure-g">
             {images}
           </div>
-          {this.props.images.size > 1 && <div className="" onClick={this.props.createAlbum}>See album</div>}
+          {this.canSeeAlbum() && 
+            <div className="upload-album">
+              <div className="upload-albumButton" onClick={this.props.createAlbum}>See album</div>
+            </div>
+          }
         </div>
       </div>
     );
@@ -42,6 +46,19 @@ class UploaderModal extends Component {
 
   handleFileSelected = (event) => {
     this.props.handleFiles(event.target.files)
+  }
+
+  // No images pending and more than one image
+  canSeeAlbum = () => {
+    if (this.props.images.size > 1) {
+      for (let image of this.props.images.values()) {
+        if (image.status === 0) {
+          return false;
+        }
+      }
+      return true;
+    }
+    return false;
   }
 }
 

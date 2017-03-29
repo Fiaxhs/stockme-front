@@ -29,7 +29,7 @@ class Uploader extends Component {
   render () {
     return (
       <div className="upload">
-        <span className="upload-button" onClick={this.showUpload}>⬆ Upload</span>
+        <span className="upload-button" onClick={this.showUpload}><i className="material-icons">cloud_upload</i> Upload</span>
         <UploaderModal
           createAlbum={this.createAlbum}
           handleFiles={this.handleFiles}

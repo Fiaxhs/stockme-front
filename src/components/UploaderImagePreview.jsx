@@ -4,7 +4,11 @@ class UploaderImagePreview extends Component {
 
   constructor(props) {
     super(props);
-    this.statuses = ['pending', 'ok', 'fail'];
+    this.statuses = [
+      'hourglass_empty',
+      'done',
+      'error'
+    ];
   }
 
   componentDidMount() {
@@ -16,7 +20,7 @@ class UploaderImagePreview extends Component {
   render() {
     return (
       <div className="pure-u-1-2 pure-u-xl-1-5 pure-u-md-1-4 pure-u-sm-1-3 upload-imageContainer">
-          <span className={'upload-status' + this.statuses[this.props.file.status]}></span>
+          <i className="upload-status material-icons">{this.statuses[this.props.file.status]}</i>
           <img className="upload-imagePreview" alt="" ref={(img) => { this.img = img; }} src="" />
       </div>
     );

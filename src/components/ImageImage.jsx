@@ -14,11 +14,11 @@ class ImageImage extends Component {
     return (
       <div className="image-container">
         <h1 className="image-title">
-          <EditInPlace canEdit={this.props.canEdit} text={img.title} update={this.props.updateTitle}/>
+          <EditInPlace defaultText="No title" canEdit={this.props.canEdit} text={img.title} update={this.props.updateTitle}/>
         </h1>
         <img className="image-image" src={img.small_url} alt={img.title} />
         <div className="image-description">
-          <EditInPlace canEdit={this.props.canEdit} text={img.description} update={this.props.updateDescription} textarea={true}/>
+          <EditInPlace defaultText="No description" canEdit={this.props.canEdit} text={img.description} update={this.props.updateDescription} textarea={true}/>
         </div>
       </div>
     );

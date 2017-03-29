@@ -28,10 +28,10 @@ class EditInPlace extends Component {
     } else {
       if (this.props.textarea) {
         center = <div>
-          <Nl2br text={this.props.text || (this.props.canEdit && 'No title')} />
+          <Nl2br text={this.props.text || (this.props.canEdit && this.props.defaultText)} />
         </div>;
       } else {
-        center = <div>{this.props.text || (this.props.canEdit && 'No title')}</div>;
+        center = <div>{this.props.text || (this.props.canEdit && this.props.defaultText)}</div>;
       }
     }
 
