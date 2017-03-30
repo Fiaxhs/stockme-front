@@ -64,21 +64,27 @@ class Uploader extends Component {
 
   // Deal with dropped files
   handleFiles = files => {
-    let imageTypes = ['image/png', 'image/jpg', 'image/jpeg'];
+    const imageTypes = ['image/png', 'image/jpg', 'image/jpeg'];
+    let tempMap = new Map();
+
     files = Array.from(files);
     files.forEach( file => {
       if (!imageTypes.includes(file.type)) {
         return;
       }
       let index = Math.random().toString(36).substring(2);
-      let image = [ index, {file, status: this.status_pending} ];
+      tempMap.set(index, {file, status: this.status_pending});
+    });
 
       // Add images to state, with status "started"
-      this.setState(
-        {images: new Map([...this.state.images, image])},
-        // Upload
-        () => {this.uploadFile(index);});
-    });
+    this.setState({images: new Map([...this.state.images, ...tempMap])},
+      // Upload
+      () => {
+        for (let index of tempMap.keys()) {
+          this.uploadFile(index);
+        }
+      }
+    );
   }
 
   // Send file to api
