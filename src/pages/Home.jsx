@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { query } from '../utils/api';
-import HomeImage from '../components/HomeImage'
+import HomeImage from '../components/HomeImage';
 
 import '../css/home.css';
 

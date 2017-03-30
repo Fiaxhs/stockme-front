@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { translate } from 'react-i18next';
 
 import '../css/image.css';
 
@@ -15,12 +16,13 @@ class Image extends Component {
     if (!img) {
       return (<aside></aside>);
     }
+    const {t} = this.props;
     return (
       <div className="image-urlsWrapper">
-        <h3>Links</h3>
+        <h3>{t('Links')}</h3>
         <ul className="image-urlList">
           <li>
-            <span className="image-urlLabel">This page</span>
+            <span className="image-urlLabel">{t('This page')}</span>
             <input readOnly="true" className="image-urlInput" type="text" onClick={this.copyText} value={window.location}/>
           </li>
           <li>
@@ -28,18 +30,18 @@ class Image extends Component {
             <input readOnly="true" className="image-urlInput" type="text" onClick={this.copyText} value={img.url}/>
           </li>
         </ul>
-        <h3>Forum codes (phpBB)</h3>
+        <h3>{t('Forum codes (phpBB)')}</h3>
         <ul className="image-urlList">
           <li>
-            <span className="image-urlLabel">Thumb</span>
+            <span className="image-urlLabel">{t('Thumb')}</span>
             <input readOnly="true" className="image-urlInput" type="text" onClick={this.copyText} value={`[url=${window.location}][img]${img.thumb_url}[/img][/url]`}/>
           </li>
           <li>
-            <span className="image-urlLabel">Medium</span>
+            <span className="image-urlLabel">{t('Medium')}</span>
             <input readOnly="true" className="image-urlInput" type="text" onClick={this.copyText} value={`[url=${window.location}][img]${img.small_url}[/img][/url]`}/>
           </li>
           <li>
-            <span className="image-urlLabel">Large</span>
+            <span className="image-urlLabel">{t('Large')}</span>
             <input readOnly="true" className="image-urlInput" type="text" onClick={this.copyText} value={`[url=${window.location}][img]${img.url}[/img][/url]`}/>
           </li>
         </ul>
@@ -53,5 +55,5 @@ class Image extends Component {
   }
 }
 
-export default Image;
+export default translate()(Image);
 

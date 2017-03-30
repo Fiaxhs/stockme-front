@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { translate } from 'react-i18next';
 
 class ConfirmButton extends Component {
   constructor(props) {
@@ -11,10 +12,11 @@ class ConfirmButton extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <span ref="span" style={{minWidth: this.state.width}} className={this.props.className} onClick={this.confirm}>
         <i className="material-icons">{this.props.icon}</i>
-        {this.state.confirming ? "Sure?" : this.props.text}
+        {this.state.confirming ? t('Sure?') : this.props.text}
       </span>
     );
   }
@@ -53,4 +55,4 @@ class ConfirmButton extends Component {
   }
 }
 
-export default ConfirmButton;
+export default translate()(ConfirmButton);

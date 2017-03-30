@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import UploaderImagePreview from './UploaderImagePreview';
+import { translate } from 'react-i18next';
 
 class UploaderModal extends Component {
 
   render() {
+    const { t } = this.props;
     if (!this.props.isUploadOpen) {
       return(<div></div>);
     }
@@ -16,7 +18,7 @@ class UploaderModal extends Component {
     return (
       <div className="upload-background" onClick={this.handleBackgroundClick}>
         <div className="upload-modal">
-          <h3>Drop your files below, or click the zone to select files</h3>
+          <h3>{t('Drop your files below, or click the zone to select files')}</h3>
           <div className="upload-dropzone" onClick={this.clickInput}>
           </div>
           <input type="file" name="image" onChange={this.handleFileSelected} multiple="true" className="upload-input" ref={(input) => { this.input = input; }}/>
@@ -25,7 +27,7 @@ class UploaderModal extends Component {
           </div>
           {this.canSeeAlbum() &&
             <div className="upload-album">
-              <div className="upload-albumButton" onClick={this.props.createAlbum}>See album</div>
+              <div className="upload-albumButton" onClick={this.props.createAlbum}>{t('See album')}</div>
             </div>
           }
         </div>
@@ -62,5 +64,5 @@ class UploaderModal extends Component {
   }
 }
 
-export default UploaderModal;
+export default translate()(UploaderModal);
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../css/image.css';
+import { translate } from 'react-i18next';
 
 import EditInPlace from './EditInPlace';
 class ImageImage extends Component {
@@ -10,20 +11,22 @@ class ImageImage extends Component {
   }
 
   render () {
-    let img = this.props.image;
+    const { t } = this.props;
+    const img = this.props.image;
+
     return (
       <div className="image-container">
         <h1 className="image-title">
-          <EditInPlace defaultText="No title" canEdit={this.props.canEdit} text={img.title} update={this.props.updateTitle}/>
+          <EditInPlace defaultText={t('No title')} canEdit={this.props.canEdit} text={img.title} update={this.props.updateTitle}/>
         </h1>
         <img className="image-image" src={img.small_url} alt={img.title} />
         <div className="image-description">
-          <EditInPlace defaultText="No description" canEdit={this.props.canEdit} text={img.description} update={this.props.updateDescription} textarea={true}/>
+          <EditInPlace defaultText={t('No description')} canEdit={this.props.canEdit} text={img.description} update={this.props.updateDescription} textarea={true}/>
         </div>
       </div>
     );
   }
 }
 
-export default ImageImage;
+export default translate()(ImageImage);
 

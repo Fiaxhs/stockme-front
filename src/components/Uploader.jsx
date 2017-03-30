@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import Cookies from 'js-cookie';
+import { translate } from 'react-i18next';
 
 import UploaderModal from './UploaderModal';
 import { query } from '../utils/api';
@@ -27,9 +28,10 @@ class Uploader extends Component {
   }
 
   render () {
+    const { t } = this.props;
     return (
       <div className="upload">
-        <span className="upload-button" onClick={this.showUpload}><i className="material-icons">cloud_upload</i> Upload</span>
+        <span className="upload-button" onClick={this.showUpload}><i className="material-icons">cloud_upload</i> {t('Upload')}</span>
         <UploaderModal
           createAlbum={this.createAlbum}
           handleFiles={this.handleFiles}
@@ -169,4 +171,4 @@ class Uploader extends Component {
   hideUpload = () => this.setState({isUploadOpen: false});
 }
 
-export default Uploader;
+export default translate()(Uploader);
