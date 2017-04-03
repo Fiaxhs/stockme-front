@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { translate } from 'react-i18next';
 
 class UploaderImagePreview extends Component {
 
@@ -18,13 +19,14 @@ class UploaderImagePreview extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div className="pure-u-1-2 pure-u-xl-1-5 pure-u-md-1-4 pure-u-sm-1-3 upload-imageContainer">
-          <i className="upload-status material-icons">{this.statuses[this.props.file.status]}</i>
+          <i className="upload-status material-icons" title={this.props.file.status === 2 ? t('An error occured') : ''}>{this.statuses[this.props.file.status]}</i>
           <img className="upload-imagePreview" alt="" ref={(img) => { this.img = img; }} src="" />
       </div>
     );
   }
 }
 
-export default UploaderImagePreview;
+export default translate()(UploaderImagePreview);

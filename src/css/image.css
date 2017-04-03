@@ -11,6 +11,7 @@
 .image-container{
   order: 2;
   flex:0 0 960px;
+  max-width: 960px;
 }
 
 .image-image  /* Plus loin que la nuit et le jour */{
@@ -46,12 +47,15 @@
 
 .image-title {
   position: relative;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
-
 
 .image-description {
   width: 100%;
-  padding: 2rem 0;
+  padding: 3rem 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /*********************************************************
@@ -66,6 +70,8 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-right: 1rem;
+  margin-top: -2px; /* to align image and not border with adjacent image*/
 }
 
 .album-imageBlock{
@@ -82,12 +88,12 @@
 .album-imageSelected, 
 .album-imageBlock:hover .album-image{
   border: 2px solid #658802;
+  padding: 0;
 }
 
 .album-imageContainer{
   display: inline-block;
   height: 100px;
-  /*width: 100px;*/
 }
 
 /*********************************************************
@@ -163,6 +169,8 @@
   .image-container{order: 1;}
   .image-album {order: 2;}
   .image-urls {order: 3;}
+  .image-title{padding: 0 0.5rem;}
+  .image-description{padding: 2rem 0.5rem 5rem 0.5rem}
 }
 
 @media screen and (max-width: 960px) {

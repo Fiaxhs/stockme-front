@@ -52,6 +52,7 @@ class Image extends Component {
   copyText(event) {
     event.target.select();
     document.execCommand('copy');
+    window.flash('Copied');
   }
 }
 

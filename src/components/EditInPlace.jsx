@@ -27,9 +27,7 @@ class EditInPlace extends Component {
       }
     } else {
       if (this.props.textarea) {
-        center = <div>
-          <Nl2br text={this.props.text || (this.props.canEdit && this.props.defaultText)} />
-        </div>;
+        center = <Nl2br text={this.props.text || (this.props.canEdit && this.props.defaultText)} />;
       } else {
         center = <div>{this.props.text || (this.props.canEdit && this.props.defaultText)}</div>;
       }

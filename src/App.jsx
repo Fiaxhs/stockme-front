@@ -11,13 +11,21 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: null
+      messages: []
     }
   }
 
   componentDidMount() {
     window.flash = (message) => {
-      this.setState({message})
+      let messages = this.state.messages.slice();
+      const idx = messages.push(message);
+      this.setState({messages});
+      // Delete message 3s after.
+      window.setTimeout( () => {
+        let msgs = this.state.messages.slice();
+        delete(msgs[idx-1]);
+        this.setState({messages: msgs});
+      }, 3000);
     }
   }
 
@@ -25,7 +33,7 @@ class App extends Component {
   render() {
     return (
       <div className="main">
-        <Flash message={this.state.message}/>
+        <Flash messages={this.state.messages}/>
         <div className="header">
           <div className="header-wrapper">
             <h1><Link to="/">Stockme</Link></h1>

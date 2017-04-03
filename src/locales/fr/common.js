@@ -16,7 +16,9 @@ const lang = {
     "No title": "Pas de titre",
     "No description": "Pas de description",
     "Image updated": "Image mise à jour",
-    "Image deleted": "Image supprimée"
+    "Image deleted": "Image supprimée",
+    "Copied": "Copié",
+    "An error occured": "Une erreur est survenue :/"
   }
 }
 
