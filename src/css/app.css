@@ -35,6 +35,9 @@ h1 { font-size: 2.4rem; }
   text-decoration: none;
   font-size: 3.2rem;
 }
+.main{
+  position: relative;
+}
 
 /*********************************************************
  * Upload
@@ -141,8 +144,8 @@ h1 { font-size: 2.4rem; }
 
 .material-icons.globalStyle-editinplacePen {
   position: absolute;
-  left: -28px;
-  top:0;
+  left: 0;
+  top: -29px;
   height: 30px;
   width: 24px;
   font-size: 2.4rem;
@@ -151,6 +154,7 @@ h1 { font-size: 2.4rem; }
   font-weight: normal;
   opacity: 0;
 }
+.globalStyle-editinplace-active .globalStyle-editinplacePen,
 .globalStyle-editinplace:hover .globalStyle-editinplacePen{
   opacity: 1;
 }
@@ -189,6 +193,47 @@ h1 { font-size: 2.4rem; }
       left: 5%;
       bottom: 1rem;
     }
+}
+
+/*********************************************************
+ * Flash
+ */
+
+.flash {
+  position: fixed;
+  top: 45px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.flash-message {
+  background-color: #111;
+  border: 1px solid #658802;
+  padding: 1rem 3rem;
+  display: none;
+}
+
+.flash-message-animation {
+  display: inline-block;
+  animation: appear 1000ms linear both, fadeOut 1000ms ease 2s both;
+}
+
+@keyframes appear {
+  0% { transform:  matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  2.5% { transform:  matrix3d(0.309, 0, 0, 0, 0, 0.309, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  5.01% { transform:  matrix3d(0.529, 0, 0, 0, 0, 0.529, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  10.01% { transform:  matrix3d(0.791, 0, 0, 0, 0, 0.791, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  15.02% { transform:  matrix3d(0.914, 0, 0, 0, 0, 0.914, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  20.02% { transform:  matrix3d(0.968, 0, 0, 0, 0, 0.968, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  30.03% { transform:  matrix3d(0.998, 0, 0, 0, 0, 0.998, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  40.04% { transform:  matrix3d(1.001, 0, 0, 0, 0, 1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  100% { transform:  matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+      to { opacity: 0; }
 }
 
 /*********************************************************

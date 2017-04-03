@@ -39,6 +39,7 @@ class Album extends Image {
         this.setState({album: album});
         browserHistory.push(`/a/${this.props.params.albumIdentifier}/${nextId}`);
       }
+      window.flash('Image deleted');
     });
   }
 

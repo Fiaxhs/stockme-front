@@ -58,6 +58,7 @@ class Image extends Component {
       body
     }).then(response => {
       this.setState({image: response});
+      window.flash('Image updated');
     }).catch(() => {});
   }
 
@@ -83,6 +84,7 @@ class Image extends Component {
       method: 'DELETE'
     }).then(() => {
       browserHistory.push(`/`);
+      window.flash('Image deleted');
     });
   }
 }

@@ -14,7 +14,9 @@ const lang = {
     "Make it private": "Rendre privée",
     "Sure?": "Confirmer ?",
     "No title": "Pas de titre",
-    "No description": "Pas de description"
+    "No description": "Pas de description",
+    "Image updated": "Image mise à jour",
+    "Image deleted": "Image supprimée"
   }
 }
 

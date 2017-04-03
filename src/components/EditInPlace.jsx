@@ -36,7 +36,7 @@ class EditInPlace extends Component {
     }
 
     return (
-      <div className="globalStyle-editinplace">
+      <div className={'globalStyle-editinplace' + (this.state.editing ? ' globalStyle-editinplace-active' : '')}>
         {this.props.canEdit && <i onClick={this.toggleEdit} className="material-icons globalStyle-editinplacePen">{this.state.editing ? 'save' : 'mode_edit'}</i>}
         {center}
       </div>
