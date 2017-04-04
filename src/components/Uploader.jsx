@@ -66,7 +66,7 @@ class Uploader extends Component {
 
   // Deal with dropped files
   handleFiles = files => {
-    const imageTypes = ['image/png', 'image/jpg', 'image/jpeg'];
+    const imageTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
     let tempMap = new Map();
 
     files = Array.from(files);
