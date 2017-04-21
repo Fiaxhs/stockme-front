@@ -18,7 +18,8 @@ const lang = {
     "Image updated": "Image mise à jour",
     "Image deleted": "Image supprimée",
     "Copied": "Copié",
-    "An error occured": "Une erreur est survenue :/"
+    "An error occured": "Une erreur est survenue :/",
+    "Alternatively, you can paste an image url below": "Vous pouvez également coller une url d'image ci-dessous"
   }
 }
 

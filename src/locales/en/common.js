@@ -18,7 +18,8 @@ const lang = {
     "Image updated": "Image updated",
     "Image deleted": "Image deleted",
     "Copied": "Copied",
-    "An error occured": "An error occured :/"
+    "An error occured": "An error occured :/",
+    "Alternatively, you can paste an image url below": "Alternatively, you can paste an image url below"
   }
 }
 
