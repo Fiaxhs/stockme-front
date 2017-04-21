@@ -15,6 +15,8 @@ class Uploader extends Component {
     this.status_ok = 1;
     this.status_fail = 2;
 
+    this.uploadUrl = this.uploadUrl.bind(this);
+
     this.state = {
       isUploadOpen: false,
       images: new Map()
@@ -37,7 +39,8 @@ class Uploader extends Component {
           handleFiles={this.handleFiles}
           images={this.state.images}
           isUploadOpen={this.state.isUploadOpen}
-          hideUpload={this.hideUpload}/>
+          hideUpload={this.hideUpload}
+          uploadUrl={this.uploadUrl}/>
       </div>
     );
   }
@@ -122,6 +125,22 @@ class Uploader extends Component {
       }
     }).catch(e => {
       this.setState({images: new Map([...this.state.images, [index, Object.assign({}, image, {status: this.status_fail})]])});
+    })
+  }
+
+  // Upload image via url
+  uploadUrl (url) {
+    let data = new FormData();
+    data.append('image[remote_image_url]', url);
+
+    return query('images', {
+      method: 'POST',
+      body: data
+    }).then(response => {
+      this.setSecret(response.secret);
+      this.addImageToCookies(response.identifier);
+      browserHistory.push(`/i/${response.identifier}`);
+      this.resetState();
     })
   }
 

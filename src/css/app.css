@@ -47,6 +47,7 @@ h1 { font-size: 2.4rem; }
   margin-left: auto;
 }
 .upload-albumButton,
+.upload-submitUrl,
 .upload-button {
   padding: 5px 20px;
   cursor: pointer;
@@ -58,6 +59,7 @@ h1 { font-size: 2.4rem; }
   font-size: 2.4rem;
   margin-right: 0.8rem;
 }
+  .upload-submitUrl:hover,
   .upload-albumButton:hover,
   .upload-button:hover {
     background-color: #658802;
@@ -133,6 +135,24 @@ h1 { font-size: 2.4rem; }
 .upload-album {
   padding: 1rem 0.2rem 0;
   text-align: right;
+}
+
+.upload-flexiflex{
+  display: flex;
+}
+.upload-url {
+  color: #000;
+  flex-basis: 90%;
+  height: 34px;
+}
+.upload-urlError {
+  color: red;
+  border-color: red;
+}
+.upload-submitUrl  {
+  vertical-align: top;
+  margin-left: 0.5rem;
+  font-size: 2.4rem;
 }
 
 /*********************************************************

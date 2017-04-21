@@ -4,6 +4,17 @@ import { translate } from 'react-i18next';
 
 class UploaderModal extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.handleSubmitUrl = this.handleSubmitUrl.bind(this);
+    this.handleSubmitKeyUp = this.handleSubmitKeyUp.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    this.urlInput && this.urlInput.focus();
+  }
+
   render() {
     const { t } = this.props;
     if (!this.props.isUploadOpen) {
@@ -25,6 +36,15 @@ class UploaderModal extends Component {
           <div className="upload-imagePreviews pure-g">
             {images}
           </div>
+          {!this.canSeeAlbum() &&
+            <div>
+              <h3>{t('Alternatively, you can paste an image url below')}</h3>
+              <div className="upload-flexiflex">
+                <input className="upload-url" name="remote_image_url" onKeyUp={this.handleSubmitKeyUp} ref={input => {this.urlInput = input;}} />
+                <i ref={submit => {this.submit = submit}}  className="material-icons upload-submitUrl" onClick={this.handleSubmitUrl}>file_upload</i>
+              </div>
+            </div>
+          }
           {this.canSeeAlbum() &&
             <div className="upload-album">
               <div className="upload-albumButton" onClick={this.props.createAlbum}>{t('See album')}</div>
@@ -48,6 +68,24 @@ class UploaderModal extends Component {
 
   handleFileSelected = (event) => {
     this.props.handleFiles(event.target.files)
+  }
+
+  handleSubmitUrl() {
+    this.props.uploadUrl(this.urlInput.value)
+    .catch(error => {
+      this.urlInput.focus();
+      this.urlInput.classList.add('upload-urlError');
+      this.submit.innerText = 'error';
+    })
+  }
+
+  handleSubmitKeyUp(event) {
+    // Enter
+    if (event.keyCode && event.keyCode === 13) {
+      this.handleSubmitUrl();
+    }
+    this.urlInput.classList.remove('upload-urlError');
+    this.submit.innerText = 'file_upload';
   }
 
   // No images pending and more than one image
