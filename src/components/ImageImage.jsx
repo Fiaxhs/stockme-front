@@ -19,7 +19,9 @@ class ImageImage extends Component {
         <h1 className="image-title">
           <EditInPlace defaultText={t('No title')} canEdit={this.props.canEdit} text={img.title} update={this.props.updateTitle}/>
         </h1>
-        <img className="image-image" src={img.small_url} alt={img.title} />
+        <a href={img.url}>
+          <img className="image-image" src={img.small_url} alt={img.title} />
+        </a>
         <div className="image-description">
           <EditInPlace defaultText={t('No description')} canEdit={this.props.canEdit} text={img.description} update={this.props.updateDescription} textarea={true}/>
         </div>
