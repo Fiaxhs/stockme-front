@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { translate } from 'react-i18next';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import { useTranslation } from "react-i18next";
 
 class ConfirmButton extends Component {
   constructor(props) {
@@ -8,15 +8,20 @@ class ConfirmButton extends Component {
     this.state = {
       confirming: false,
       width: 0
-    }
+    };
   }
 
   render() {
-    const { t } = this.props;
+    const { t } = useTranslation();
     return (
-      <span ref="span" style={{minWidth: this.state.width}} className={this.props.className} onClick={this.confirm}>
+      <span
+        ref="span"
+        style={{ minWidth: this.state.width }}
+        className={this.props.className}
+        onClick={this.confirm}
+      >
         <i className="material-icons">{this.props.icon}</i>
-        {this.state.confirming ? t('Sure?') : this.props.text}
+        {this.state.confirming ? t("Sure?") : this.props.text}
       </span>
     );
   }
@@ -27,18 +32,19 @@ class ConfirmButton extends Component {
       this.reset();
     } else {
       this.setState({
-        width: ReactDOM.findDOMNode(this.refs.span).getBoundingClientRect().width
+        width: ReactDOM.findDOMNode(this.refs.span).getBoundingClientRect()
+          .width
       });
       this.bindCancel();
-      this.setState({confirming: true});
+      this.setState({ confirming: true });
     }
-  }
+  };
 
   bindCancel = () => {
-    document.body.addEventListener('click', this.handleCancel, false);
-  }
+    document.body.addEventListener("click", this.handleCancel, false);
+  };
 
-  handleCancel = (event) => {
+  handleCancel = event => {
     let span = ReactDOM.findDOMNode(this.refs.span);
     if (this.state.confirming) {
       if (event.target !== span && event.target.parentNode !== span) {
@@ -47,12 +53,12 @@ class ConfirmButton extends Component {
         this.reset();
       }
     }
-  }
+  };
 
   reset = () => {
-    document.body.removeEventListener('click', this.handleCancel);
-    this.setState({confirming: false});
-  }
+    document.body.removeEventListener("click", this.handleCancel);
+    this.setState({ confirming: false });
+  };
 }
 
-export default translate()(ConfirmButton);
+export default ConfirmButton;
